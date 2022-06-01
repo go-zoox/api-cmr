@@ -17,25 +17,25 @@ go get github.com/go-zoox/api-cmr
 ## Getting Started
 
 ```go
+package main
+
 import (
-  "testing"
   "github.com/go-zoox/api-cmr"
 )
 
 func main(t *testing.T) {
-	loadConfig := func() {
-		panic("load config panic")
-	}
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write(cmr.Success("Hello World!"))
+		// or
+		cmr.WriteSuccess(w, "Hello World!")
+	})
 
-	if err := api-cmr.Do(loadConfig); err != nil {
-		log.Error(err)
-	}
+	http.ListenAndServe(":8080", nil)
 }
 ```
 
 ## Inspired By
-* [kenkyu392/go-api-cmr](https://github.com/kenkyu392/go-api-cmr) - Provides a sandbox for the api-cmr execution of panic-inducing programs
-* [go-zoox/retry](https://github.com/andskur/argon2-hashing) - Catch Panic In Retries
+* [omniti-labs/jsend](https://github.com/omniti-labs/jsend) - JSend is a specification for a simple, no-frills, JSON based format for application-level communication
 
 ## License
 GoZoox is released under the [MIT License](./LICENSE).
